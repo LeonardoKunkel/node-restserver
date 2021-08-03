@@ -28,12 +28,14 @@ const UsuarioSchema = Schema({
         default: true
     },
     google: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 });
 
 UsuarioSchema.methods.toJSON = function() {
-    const { __v, password, ...usuario } = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
     return usuario;
 }
 
