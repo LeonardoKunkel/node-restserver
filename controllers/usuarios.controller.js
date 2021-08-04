@@ -34,7 +34,6 @@ const usuariosPut = async(req, res = response) => {
     const { id } = req.params;
     const { _id, password, google, correo, ...resto } = req.body;
     
-    // TODO validar contra base de datos
     if ( password ) {
         // Encriptar la contraseña
         const salt = bcrypt.genSaltSync(10);
@@ -52,7 +51,7 @@ const usuariosPost = async(req, res = response) => {
     const usuario = new Usuario({ nombre, correo, password, rol });
     
     // Encriptar la contraseña
-    const salt = bcrypt.genSaltSync(10);
+    const salt = bcrypt.genSaltSync();
     usuario.password = bcrypt.hashSync( password, salt );
     
     // Guardar en BD
